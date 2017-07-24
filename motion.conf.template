@@ -8,7 +8,7 @@
 ############################################################
 
 # Start in daemon (background) mode and release terminal (default: off)
-daemon off
+; daemon off
 
 # File to store the process ID, also called pid file. (default: not defined)
 process_id_file /var/run/motion/motion.pid
@@ -18,17 +18,17 @@ process_id_file /var/run/motion/motion.pid
 ############################################################
 
 # Start in Setup-Mode, daemon disabled. (default: off)
-setup_mode off
+; setup_mode off
 
 
 # Use a file to save logs messages, if not defined stderr and syslog is used. (default: not defined)
-;logfile /tmp/motion.log
+; logfile /tmp/motion.log
 
 # Level of log messages [1..9] (EMR, ALR, CRT, ERR, WRN, NTC, INF, DBG, ALL). (default: 6 / NTC)
-log_level 6
+; log_level 6
 
 # Filter to log messages by type (COR, STR, ENC, NET, DBL, EVT, TRK, VID, ALL). (default: ALL)
-log_type all
+; log_type all
 
 ###########################################################
 # Capture device options
@@ -36,7 +36,7 @@ log_type all
 
 # Videodevice to be used for capturing  (default /dev/video0)
 # for FreeBSD default is /dev/bktr0
-videodevice /dev/video0
+videodevice $VIDEODEVICE
 
 # v4l2_palette allows to choose preferable palette to be use by motion
 # to capture from those supported by your videodevice. (default: 17)
@@ -65,7 +65,7 @@ videodevice /dev/video0
 # V4L2_PIX_FMT_YUV422P : 16 '422P'
 # V4L2_PIX_FMT_YUV420  : 17 'YU12'
 #
-v4l2_palette 17
+; v4l2_palette 17
 
 # Tuner device to be used for capturing using tuner as source (default /dev/tuner0)
 # This is ONLY used for FreeBSD. Leave it commented out for Linux
@@ -73,33 +73,33 @@ v4l2_palette 17
 
 # The video input to be used (default: -1)
 # Should normally be set to 0 or 1 for video/TV cards, and -1 for USB cameras
-input -1
+; input -1
 
 # The video norm to use (only for video capture and TV tuner cards)
 # Values: 0 (PAL), 1 (NTSC), 2 (SECAM), 3 (PAL NC no colour). Default: 0 (PAL)
-norm 0
+; norm 0
 
 # The frequency to set the tuner to (kHz) (only for TV tuner cards) (default: 0)
-frequency 0
+; frequency 0
 
 # Rotate image this number of degrees. The rotation affects all saved images as
 # well as movies. Valid values: 0 (default = no rotation), 90, 180 and 270.
-rotate 0
+rotate $ROTATE
 
 # Image width (pixels). Valid range: Camera dependent, default: 352
-width 1920
+width $WIDTH
 
 # Image height (pixels). Valid range: Camera dependent, default: 288
-height 1080
+height $HEIGHT
 
 # Maximum number of frames to be captured per second.
 # Valid range: 2-100. Default: 100 (almost no limit).
-framerate 2
+framerate $FRAMERATE
 
 # Minimum time in seconds between capturing picture frames from the camera.
 # Default: 0 = disabled - the capture rate is given by the camera framerate.
 # This option is used when you want to capture images at a rate lower than 2 per second.
-minimum_frame_time 0
+minimum_frame_time $FRAMETIME
 
 # URL to use if you are using a network camera, size will be autodetected (incl http:// ftp:// mjpg:// rstp:// or file:///)
 # Must be a URL that returns single jpeg pictures or a raw mjpeg stream. Default: Not defined
@@ -114,7 +114,7 @@ minimum_frame_time 0
 # force: Use HTTP/1.0 requests with keep alive header to reuse the same connection.
 # on:    Use HTTP/1.1 requests that support keep alive as default.
 # Default: off
-netcam_keepalive off
+; netcam_keepalive off
 
 # URL to use for a netcam proxy server, if required, e.g. "http://myproxy".
 # If a port number other than 80 is needed, use "http://myproxy:1234".
@@ -123,31 +123,31 @@ netcam_keepalive off
 
 # Set less strict jpeg checks for network cameras with a poor/buggy firmware.
 # Default: off
-netcam_tolerant_check off
+; netcam_tolerant_check off
 
 # Let motion regulate the brightness of a video device (default: off).
 # The auto_brightness feature uses the brightness option as its target value.
 # If brightness is zero auto_brightness will adjust to average brightness value 128.
 # Only recommended for cameras without auto brightness
-auto_brightness off
+; auto_brightness off
 
 # Set the initial brightness of a video device.
 # If auto_brightness is enabled, this value defines the average brightness level
 # which Motion will try and adjust to.
 # Valid range 0-255, default 0 = disabled
-brightness 0
+; brightness 0
 
 # Set the contrast of a video device.
 # Valid range 0-255, default 0 = disabled
-contrast 0
+; contrast 0
 
 # Set the saturation of a video device.
 # Valid range 0-255, default 0 = disabled
-saturation 0
+; saturation 0
 
 # Set the hue of a video device (NTSC feature).
 # Valid range 0-255, default 0 = disabled
-hue 0
+; hue 0
 
 
 ############################################################
@@ -155,13 +155,13 @@ hue 0
 ############################################################
 
 # Number of frames to capture in each roundrobin step (default: 1)
-roundrobin_frames 1
+; roundrobin_frames 1
 
 # Number of frames to skip before each roundrobin step (default: 1)
-roundrobin_skip 1
+; roundrobin_skip 1
 
 # Try to filter out noise generated by roundrobin (default: off)
-switchfilter off
+; switchfilter off
 
 
 ############################################################
@@ -170,16 +170,16 @@ switchfilter off
 
 # Threshold for number of changed pixels in an image that
 # triggers motion detection (default: 1500)
-threshold 1500
+threshold $THRESHOLD
 
 # Automatically tune the threshold down if possible (default: off)
-threshold_tune off
+; threshold_tune off
 
 # Noise threshold for the motion detection (default: 32)
-noise_level 32
+noise_level $NOISELEVEL
 
 # Automatically tune the noise threshold (default: on)
-noise_tune on
+; noise_tune on
 
 # Despeckle motion image using (e)rode or (d)ilate or (l)abel (Default: not defined)
 # Recommended value is EedDl. Any combination (and number of) of E, e, d, and D is valid.
@@ -196,30 +196,30 @@ despeckle_filter EedDl
 
 # PGM file to use as a sensitivity mask.
 # Full path name to. (Default: not defined)
-; mask_file /opt/mask.pgm
+mask_file $MASKFILE
 
 # Dynamically create a mask file during operation (default: 0)
 # Adjust speed of mask changes from 0 (off) to 10 (fast)
-smart_mask_speed 10
+smart_mask_speed $SMARTMASKSPEED
 
 # Ignore sudden massive light intensity changes given as a percentage of the picture
 # area that changed intensity. Valid range: 0 - 100 , default: 0 = disabled
-lightswitch 0
+lightswitch $LIGHTSWITCH
 
 # Picture frames must contain motion at least the specified number of frames
 # in a row before they are detected as true motion. At the default of 1, all
 # motion is detected. Valid range: 1 to thousands, recommended 1-5
-minimum_motion_frames 1
+minimum_motion_frames $MINMOTIONFRAMES
 
 # Specifies the number of pre-captured (buffered) pictures from before motion
 # was detected that will be output at motion detection.
 # Recommended range: 0 to 5 (default: 0)
 # Do not use large values! Large values will cause Motion to skip video frames and
 # cause unsmooth movies. To smooth movies use larger values of post_capture instead.
-pre_capture 0
+; pre_capture 0
 
 # Number of frames to capture after motion is no longer detected (default: 0)
-post_capture 0
+; post_capture 0
 
 # Event Gap is the seconds of no motion detection that triggers the end of an event.
 # An event is defined as a series of motion images taken within a short timeframe.
@@ -227,14 +227,14 @@ post_capture 0
 # events causing all Motion to be written to one single movie file and no pre_capture.
 # If set to 0, motion is running in gapless mode. Movies don't have gaps anymore. An
 # event ends right after no more motion is detected and post_capture is over.
-event_gap 60
+event_gap $EVENTGAP
 
 # Maximum length in seconds of a movie
 # When value is exceeded a new movie file is created. (Default: 0 = infinite)
-max_movie_time 0
+; max_movie_time 0
 
 # Always save images even if there was no motion (default: off)
-emulate_motion off
+; emulate_motion off
 
 
 ############################################################
@@ -247,17 +247,17 @@ emulate_motion off
 # Picture with most motion of an event is saved when set to 'best'.
 # Picture with motion nearest center of picture is saved when set to 'center'.
 # Can be used as preview shot for the corresponding movie.
-output_pictures on
+output_pictures $OUTPUTPICTURES
 
 # Output pictures with only the pixels moving object (ghost images) (default: off)
-output_debug_pictures off
+; output_debug_pictures off
 
 # The quality (in percent) to be used by the jpeg compression (default: 75)
-quality 80
+; quality 80
 
 # Type of output images
 # Valid values: jpeg, ppm (default: jpeg)
-picture_type jpeg
+; picture_type jpeg
 
 ############################################################
 # FFMPEG related options
@@ -267,29 +267,29 @@ picture_type jpeg
 ############################################################
 
 # Use ffmpeg to encode movies in realtime (default: off)
-ffmpeg_output_movies off
+ffmpeg_output_movies $OUTPUTMOVIES
 
 # Use ffmpeg to make movies with only the pixels moving
 # object (ghost images) (default: off)
-ffmpeg_output_debug_movies off
+; ffmpeg_output_debug_movies off
 
 # Use ffmpeg to encode a timelapse movie
 # Default value 0 = off - else save frame every Nth second
-ffmpeg_timelapse 0
+; ffmpeg_timelapse 0
 
 # The file rollover mode of the timelapse video
 # Valid values: hourly, daily (default), weekly-sunday, weekly-monday, monthly, manual
-ffmpeg_timelapse_mode daily
+; ffmpeg_timelapse_mode daily
 
 # Bitrate to be used by the ffmpeg encoder (default: 400000)
 # This option is ignored if ffmpeg_variable_bitrate is not 0 (disabled)
-ffmpeg_bps 500000
+; ffmpeg_bps 500000
 
 # Enables and defines variable bitrate for the ffmpeg encoder.
 # ffmpeg_bps is ignored if variable bitrate is enabled.
 # Valid values: 0 (default) = fixed bitrate defined by ffmpeg_bps,
 # or the range 2 - 31 where 2 means best quality and 31 is worst.
-ffmpeg_variable_bitrate 0
+; ffmpeg_variable_bitrate 0
 
 # Codec to used by ffmpeg for the video compression.
 # Timelapse mpegs are always made in mpeg1 format independent from this option.
@@ -303,19 +303,19 @@ ffmpeg_variable_bitrate 0
 # ffv1 - FF video codec 1 for Lossless Encoding ( experimental )
 # mov - QuickTime ( testing )
 # ogg - Ogg/Theora ( testing )
-ffmpeg_video_codec mpeg4
+; ffmpeg_video_codec mpeg4
 
 # Use ffmpeg to deinterlace video. Necessary if you use an analog camera
 # and see horizontal combing on moving objects in video or pictures.
 # (default: off)
-ffmpeg_deinterlace off
+; ffmpeg_deinterlace off
 
 ############################################################
 # SDL Window
 ############################################################
 
 # Number of motion thread to show in SDL Window (default: 0 = disabled)
-sdl_threadnr 0
+; sdl_threadnr 0
 
 ############################################################
 # External pipe to video encoder
@@ -325,11 +325,11 @@ sdl_threadnr 0
 #############################################################
 
 # Bool to enable or disable extpipe (default: off)
-use_extpipe off
+; use_extpipe off
 
 # External program (full path and opts) to pipe raw video to
 # Generally, use '-' for STDIN...
-;extpipe mencoder -demuxer rawvideo -rawvideo w=320:h=240:i420 -ovc x264 -x264encopts bframes=4:frameref=1:subq=1:scenecut=-1:nob_adapt:threads=1:keyint=1000:8x8dct:vbv_bufsize=4000:crf=24:partitions=i8x8,i4x4:vbv_maxrate=800:no-chroma-me -vf denoise3d=16:12:48:4,pp=lb -of   avi -o %f.avi - -fps %fps
+; extpipe mencoder -demuxer rawvideo -rawvideo w=320:h=240:i420 -ovc x264 -x264encopts bframes=4:frameref=1:subq=1:scenecut=-1:nob_adapt:threads=1:keyint=1000:8x8dct:vbv_bufsize=4000:crf=24:partitions=i8x8,i4x4:vbv_maxrate=800:no-chroma-me -vf denoise3d=16:12:48:4,pp=lb -of   avi -o %f.avi - -fps %fps
 
 
 
@@ -338,7 +338,7 @@ use_extpipe off
 ############################################################
 
 # Make automated snapshot every N seconds (default: 0 = disabled)
-snapshot_interval 0
+; snapshot_interval 0
 
 
 ############################################################
@@ -357,7 +357,7 @@ snapshot_interval 0
 # Locate and draw a box around the moving object.
 # Valid values: on, off, preview (default: off)
 # Set to 'preview' will only draw a box in preview_shot pictures.
-locate_motion_mode off
+; locate_motion_mode off
 
 # Set the look and style of the locate box if enabled.
 # Valid values: box, redbox, cross, redcross (default: box)
@@ -365,12 +365,12 @@ locate_motion_mode off
 # Set to 'redbox' will draw a red box.
 # Set to 'cross' will draw a little cross to mark center.
 # Set to 'redcross' will draw a little red cross to mark center.
-locate_motion_style box
+; locate_motion_style box
 
 # Draws the timestamp using same options as C function strftime(3)
 # Default: %Y-%m-%d\n%T = date in ISO format and time in 24 hour clock
 # Text is placed in lower right corner
-text_right %Y-%m-%d\n%T-%q
+; text_right %Y-%m-%d\n%T-%q
 
 # Draw a user defined text on the images using same options as C function strftime(3)
 # Default: Not defined = no text
@@ -380,7 +380,7 @@ text_right %Y-%m-%d\n%T-%q
 # Draw the number of changed pixed on the images (default: off)
 # Will normally be set to off except when you setup and adjust the motion settings
 # Text is placed in upper right corner
-text_changes off
+; text_changes off
 
 # This option defines the value of the special event conversion specifier %C
 # You can use any conversion specifier in this option except %C. Date and time
@@ -388,16 +388,16 @@ text_changes off
 # Default: %Y%m%d%H%M%S
 # The idea is that %C can be used filenames and text_left/right for creating
 # a unique identifier for each event.
-text_event %Y%m%d%H%M%S
+; text_event %Y%m%d%H%M%S
 
 # Draw characters at twice normal size on images. (default: off)
-text_double off
+; text_double off
 
 
 # Text to include in a JPEG EXIF comment
 # May be any text, including conversion specifiers.
 # The EXIF timestamp is included independent of this text.
-;exif_text %i%J/%K%L
+; exif_text %i%J/%K%L
 
 ############################################################
 # Target Directories and filenames For Images And Films
@@ -454,7 +454,7 @@ timelapse_filename %Y%m%d-timelapse
 # Global Network Options
 ############################################################
 # Enable or disable IPV6 for http control and stream (default: off )
-ipv6_enabled off
+; ipv6_enabled off
 
 ############################################################
 # Live Stream Server
@@ -468,10 +468,10 @@ stream_quality 80
 
 # Output frames at 1 fps when no motion is detected and increase to the
 # rate given by stream_maxrate when motion is detected (default: off)
-stream_motion off
+; stream_motion off
 
 # Maximum framerate for stream streams (default: 1)
-stream_maxrate 10
+; stream_maxrate 1
 
 # Restrict stream connections to localhost only (default: on)
 stream_localhost off
@@ -479,13 +479,13 @@ stream_localhost off
 # Limits the number of images per connection (default: 0 = unlimited)
 # Number can be defined by multiplying actual stream rate by desired number of seconds
 # Actual stream rate is the smallest of the numbers framerate and stream_maxrate
-stream_limit 0
+; stream_limit 0
 
 # Set the authentication method (default: 0)
 # 0 = disabled
 # 1 = Basic authentication
 # 2 = MD5 digest (the safer authentication)
-stream_auth_method 0
+; stream_auth_method 0
 
 # Authentication for the stream. Syntax username:password
 # Default: not defined (Disabled)
@@ -503,7 +503,7 @@ webcontrol_port 8080
 webcontrol_localhost off
 
 # Output for http server, select off to choose raw text plain (default: on)
-webcontrol_html_output on
+; webcontrol_html_output on
 
 # Authentication for the http based control. Syntax username:password
 # Default: not defined (Disabled)
@@ -517,66 +517,66 @@ webcontrol_html_output on
 # Type of tracker (0=none (default), 1=stepper, 2=iomojo, 3=pwc, 4=generic, 5=uvcvideo, 6=servo)
 # The generic type enables the definition of motion center and motion size to
 # be used with the conversion specifiers for options like on_motion_detected
-track_type 0
+; track_type 0
 
 # Enable auto tracking (default: off)
-track_auto off
+; track_auto off
 
 # Serial port of motor (default: none)
-;track_port /dev/ttyS0
+; track_port /dev/ttyS0
 
 # Motor number for x-axis (default: 0)
-;track_motorx 0
+; track_motorx 0
 
 # Set motorx reverse (default: 0)
-;track_motorx_reverse 0
+; track_motorx_reverse 0
 
 # Motor number for y-axis (default: 0)
-;track_motory 1
+; track_motory 1
 
 # Set motory reverse (default: 0)
-;track_motory_reverse 0
+; track_motory_reverse 0
 
 # Maximum value on x-axis (default: 0)
-;track_maxx 200
+; track_maxx 200
 
 # Minimum value on x-axis (default: 0)
-;track_minx 50
+; track_minx 50
 
 # Maximum value on y-axis (default: 0)
-;track_maxy 200
+; track_maxy 200
 
 # Minimum value on y-axis (default: 0)
-;track_miny 50
+; track_miny 50
 
 # Center value on x-axis (default: 0)
-;track_homex 128
+; track_homex 128
 
 # Center value on y-axis (default: 0)
-;track_homey 128
+; track_homey 128
 
 # ID of an iomojo camera if used (default: 0)
-track_iomojo_id 0
+; track_iomojo_id 0
 
 # Angle in degrees the camera moves per step on the X-axis
 # with auto-track (default: 10)
 # Currently only used with pwc type cameras
-track_step_angle_x 10
+; track_step_angle_x 10
 
 # Angle in degrees the camera moves per step on the Y-axis
 # with auto-track (default: 10)
 # Currently only used with pwc type cameras
-track_step_angle_y 10
+; track_step_angle_y 10
 
 # Delay to wait for after tracking movement as number
 # of picture frames (default: 10)
-track_move_wait 10
+; track_move_wait 10
 
 # Speed to set the motor to (stepper motor option) (default: 255)
-track_speed 255
+; track_speed 255
 
 # Number of steps to make (stepper motor option) (default: 40)
-track_stepsize 40
+; track_stepsize 40
 
 
 ############################################################
@@ -598,7 +598,7 @@ track_stepsize 40
 
 # Do not sound beeps when detecting motion (default: on)
 # Note: Motion never beeps when running in daemon mode.
-quiet on
+; quiet on
 
 # Command to be executed when an event starts. (default: none)
 # An event starts at first motion detected after a period of no motion defined by event_gap
