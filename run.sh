@@ -15,6 +15,12 @@ export EVENTGAP=${EVENTGAP:-60}
 export OUTPUTPICTURES=${OUTPUTPICTURES:-on}
 export OUTPUTMOVIES=${OUTPUTMOVIES:-off}
 
+if  [[ $MASKFILE == http* ]] ;
+then
+	curl -o /opt/mask.pgm $MASKFILE
+	export MASKFILE=/opt/mask.pgm  
+fi
+
 envsubst < "/opt/motion.conf.template" > "/opt/motion.conf"
 
 motion -c /opt/motion.conf
