@@ -15,6 +15,8 @@ export EVENTGAP=${EVENTGAP:-60}
 export OUTPUTPICTURES=${OUTPUTPICTURES:-on}
 export OUTPUTMOVIES=${OUTPUTMOVIES:-off}
 
+modprobe bcm2835-v4l2
+
 if  [[ $MASKFILE == http* ]] ;
 then
 	curl -o /opt/mask.pgm $MASKFILE
