@@ -18,7 +18,9 @@ RUN chmod u+x /opt/on_event_start.sh &&\
     chmod u+x /opt/on_event_end.sh &&\
     chmod u+x /opt/run.sh
 
-# reboot container hourly to trigger the automatic camera light adaption
-RUN echo "23 * * * * /sbin/shutdown -r now" | crontab
+# restart container hourly to trigger the automatic camera light adaption
+# reboot device daily for stability
+RUN echo "23 * * * * /sbin/shutdown -r now" | crontab &&\
+	echo "13 3 * * * curl -X POST --header \"Content-Type:application/json\" \"$RESIN_SUPERVISOR_ADDRESS/v1/reboot?apikey=$RESIN_SUPERVISOR_API_KEY\"" | crontab
 
 CMD ["/opt/run.sh"]
