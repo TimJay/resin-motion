@@ -20,7 +20,7 @@ modprobe bcm2835-v4l2
 
 if  [[ $MASKFILE == http* ]] ;
 then
-	curl -o /opt/mask.pgm $MASKFILE
+	curl -o /opt/mask.pgm "$MASKFILE"
 	export MASKFILE=/opt/mask.pgm  
 fi
 
