@@ -1,4 +1,5 @@
 #!/bin/bash
+export DEVICENAME=${DEVICENAME:-$RESIN_DEVICE_UUID}
 export VIDEODEVICE=${VIDEODEVICE:-/dev/video0}
 export ROTATE=${ROTATE:-0}
 export WIDTH=${WIDTH:-1920}
